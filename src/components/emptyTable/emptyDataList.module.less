@@ -1,0 +1,35 @@
+@link-color: #4c70ff;
+@hover-color: #8099ff;
+@focus-color: #4465e6;
+.noResult {
+  position: relative;
+  height: calc(100vh - 510px);
+  margin-top: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .noResultImg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+  }
+
+  ._a {
+    cursor: pointer;
+    text-decoration: none;
+    color: @link-color;
+
+    &:hover {
+      color: @hover-color;
+    }
+
+    &:focus {
+      color: @focus-color;
+    }
+  }
+}
