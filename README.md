@@ -29,8 +29,8 @@
 ```
   npm install @youdao-ead-fe/yodao-ui
   
-  // 在输入文件如_app.js中引入style
-  import '@youdao-ead-fe/yodao-ui/style'
+  // 在入口文件如_app.js中引入style
+  import '@youdao-ead-fe/yodao-ui/dist/style.css'
   
   // 在目标页面中
   import {MutipleSelector} from @youdao-ead-fe/yodao-ui

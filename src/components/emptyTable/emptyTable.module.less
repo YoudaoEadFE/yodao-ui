@@ -1,9 +1,13 @@
 @link-color: #4c70ff;
 @hover-color: #8099ff;
 @focus-color: #4465e6;
+@color-disable: #BFBFBF;
+
 .noResult {
-  position: relative;
-  height: calc(100vh - 510px);
+  color: @color-disable;
+  //position: relative;
+  //height: calc(100vh - 510px);
+  width: 100%;
   margin-top: 8px;
   background-color: #fff;
   border-radius: 8px;
@@ -13,10 +17,21 @@
   align-items: center;
 
   .noResultImg {
-    position: absolute;
-    inset: 0;
-    margin: auto;
     height: fit-content;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img, svg {
+      max-width: 200px;
+    }
+  }
+
+  .emptyDescription {
+    margin-top: 8px;
+    color: @color-disable;
+    text-align: center;
   }
 
   ._a {
