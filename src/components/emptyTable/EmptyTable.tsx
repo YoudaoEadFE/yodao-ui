@@ -1,4 +1,4 @@
-import style from './emptyTable.module.less';
+import s from './emptyTable.module.less';
 
 
 const EmptyIcon = () => (<svg className="icon" viewBox="0 0 1598 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -21,6 +21,10 @@ const EmptyIcon = () => (<svg className="icon" viewBox="0 0 1598 1024" version="
 
 const EmptyTable = (props: {
   /**
+   * 自定义样式
+   */
+  style?: React.CSSProperties;
+  /**
    * 定制图标
    */
   SearchIcon?: JSX.Element | string;
@@ -42,6 +46,7 @@ const EmptyTable = (props: {
   onReset?: () => void;
 }) => {
   const {
+    style,
     onReset,
     onSearch = false,
     SearchIcon = EmptyIcon(),
@@ -50,23 +55,23 @@ const EmptyTable = (props: {
   } = props;
 
   return (
-    <div className={style.noResult}>
+    <div className={s.noResult} style={style}>
       {onSearch && onReset ? (
         <span>
           暂未找到符合条件的数据，
-          <a className={style._a} onClick={() => onReset?.()}>
+          <a className={s._a} onClick={() => onReset?.()}>
             重置筛选条件
           </a>
         </span>
       ) : onSearch && searchText ? (
-          <div className={style.noResultImg}>
+          <div className={s.noResultImg}>
             { typeof SearchIcon === 'string' ? <img src={SearchIcon} /> : SearchIcon}
-            <div className={style.emptyDescription}>{searchText || '暂无数据'}</div>
+            <div className={s.emptyDescription}>{searchText || '暂无数据'}</div>
           </div>
       ) : (
-          <div className={style.noResultImg}>
+          <div className={s.noResultImg}>
             { typeof SearchIcon === 'string' ? <img src={SearchIcon} /> : SearchIcon}
-            <div className={style.emptyDescription}>{emptyText}</div>
+            <div className={s.emptyDescription}>{emptyText}</div>
           </div>
       )}
     </div>

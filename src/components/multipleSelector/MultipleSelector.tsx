@@ -3,13 +3,13 @@ import { useState, useRef, useMemo, useEffect } from 'react';
 import cs from 'classnames';
 import { SelectableGroup } from 'react-selectable-fast';
 import MutiCell from './MutiCell';
-import s from './MutipleSelector.module.less';
+import s from './multipleSelector.module.less';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SelectableGroupDom = SelectableGroup as any
 
 
-interface MutipleSelectorProps {
+interface MultipleSelectorProps {
   /**
    * Components name
    */
@@ -48,7 +48,7 @@ interface MutipleSelectorProps {
   defaultOptions: (number)[]
 }
 
-const MutipleSelector = ({
+const MultipleSelector = ({
   componentsName = '多重选择器',
   value = [],
   isEditMode = false,
@@ -58,7 +58,7 @@ const MutipleSelector = ({
   containerWidth = 682,
   containerHeight = 312,
   defaultOptions = [],
-}: MutipleSelectorProps) => {
+}: MultipleSelectorProps) => {
   const [selectedAges, setSelectedAges] = useState<number[]>(value as number[]); // 选中的年龄区间
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -195,4 +195,4 @@ const MutipleSelector = ({
   );
 };
 
-export default MutipleSelector;
+export default MultipleSelector;

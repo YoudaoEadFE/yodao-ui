@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cs from 'classnames';
 import { createSelectable } from 'react-selectable-fast';
-import s from './MutipleSelector.module.less';
+import s from './multipleSelector.module.less';
 
 interface DateCellProps {
   cellValue: number;

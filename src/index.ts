@@ -1,5 +1,5 @@
 import EmptyTable from './components/emptyTable/EmptyTable'
-import MutipleSelector from './components/multipleSelector/MutipleSelector'
+import MultipleSelector from './components/multipleSelector/MultipleSelector'
 import MultiDatePicker from './components/multiDatePicker/MultiDatePicker'
 
-export { EmptyTable, MutipleSelector, MultiDatePicker }
+export { EmptyTable, MultipleSelector, MultiDatePicker }
