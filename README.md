@@ -4,7 +4,7 @@
 
 框架：react + vite + storybook
 
-[项目线上地址](https://github.com/YoudaoEadFE/yodao-ui)
+[项目线上地址](https://youdaoeadfe.github.io/yodao-ui)
 
 [story文档 ](https://storybook.js.org/docs/react/addons/addons-api#addonssetconfigconfig)
 
