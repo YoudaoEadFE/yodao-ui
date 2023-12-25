@@ -31,11 +31,29 @@ const weeks = ['日', '一', '二', '三', '四', '五', '六'];
 const allMonths = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
 
 interface MultiDatePickerProps { 
+  /**
+   * Week start number, 0 means Sunday, 1 means Monday ... etc.
+   */
   weekStart?: number;
+  /**
+   * Date format
+   */
   format?: string;
+  /**
+   * Theme color
+   */
   themeColor?: string;
+  /**
+   * Selected values
+   * */
   value?: string[][];
+  /**
+   * Callback function called when the value changes
+   */
   onChange?: (value: string[][]) => void;
+  /**
+   * Function for disabled date
+   */
   disabledDate?: (current: string) => boolean; 
 }
 
