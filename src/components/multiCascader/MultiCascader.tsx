@@ -1,7 +1,7 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from 'react';
 import cs from 'classnames';
 import EmptyTable from '../emptyTable/EmptyTable';
-import s from './multiCascader.module.less';
+import './multiCascader.less';
 
 // 以，|,分割的字符串，获取选中的值
 const splitKeywords = (str: string) => {
@@ -52,6 +52,10 @@ interface optionType {
 
 interface MultiCascaderProps {
   /**
+   * component class name
+   */
+  className?: string;
+  /**
    * Options of component
    */
   options: optionType[];
@@ -82,6 +86,7 @@ interface MultiCascaderProps {
 }
 
 const MultiCascader: React.FC<MultiCascaderProps> = ({
+  className,
   options,
   value,
   onChange,
@@ -202,10 +207,10 @@ const MultiCascader: React.FC<MultiCascaderProps> = ({
         key={item.value}
         title={item.label}
         className={cs({
-          [s['multi-cascader-menu-item']]: true,
-          [s['multi-cascader-menu-item-expand']]: !!item.children?.length,
-          [s['multi-cascader-menu-item-active']]: activeList.includes(item.value),
-          [s['multi-cascader-menu-item-disabled']]: disabled || item.disabled,
+          'multi-cascader-menu-item': true,
+          'multi-cascader-menu-item-expand': !!item.children?.length,
+          'multi-cascader-menu-item-active': activeList.includes(item.value),
+          'multi-cascader-menu-item-disabled': disabled || item.disabled,
         })}
         onClick={() => {
           if (disabled) return;
@@ -216,20 +221,20 @@ const MultiCascader: React.FC<MultiCascaderProps> = ({
       >
         <span
           className={cs({
-            [s['multi-cascader-checkbox']]: true,
-            [s['multi-cascader-checkbox-indeterminate']]: isIndeterminate,
-            [s['multi-cascader-checkbox-checked']]: isChecked,
-            [s['multi-cascader-checkbox-disabled']]: disabled || item.disabled,
+            'multi-cascader-checkbox': true,
+            'multi-cascader-checkbox-indeterminate': isIndeterminate,
+            'multi-cascader-checkbox-checked': isChecked,
+            'multi-cascader-checkbox-disabled': disabled || item.disabled,
           })}
           onClick={() => {
             if (disabled || item.disabled) return;
             handleChecked(item, !isChecked);
           }}
         >
-          <span className={s['multi-cascader-checkbox-inner']} />
+          <span className="multi-cascader-checkbox-inner" />
         </span>
-        <div className={s['multi-cascader-menu-item-content']}>{item.label}</div>
-        <div className={s['multi-cascader-menu-item-expand-icon']}>
+        <div className="multi-cascader-menu-item-content">{item.label}</div>
+        <div className="multi-cascader-menu-item-expand-icon">
           <span role="icon">
             <svg
               viewBox="64 64 896 896"
@@ -247,11 +252,11 @@ const MultiCascader: React.FC<MultiCascaderProps> = ({
   }
 
   return (
-    <div className={s['multi-cascader']} style={{ '--mca-theme-color': themeColor } as CSSProperties}>
+    <div className={cs('multi-cascader', className)} style={{ '--mca-theme-color': themeColor } as CSSProperties}>
       {searchable && (
-        <div className={s['multi-cascader-search-bar']}>
+        <div className="multi-cascader-search-bar">
           <textarea 
-            className={s['multi-cascader-search-bar-input']} 
+            className="multi-cascader-search-bar-input"
             placeholder={searchPlaceholder ?? '支持多项搜索，不同搜索词之间用中英文逗号隔开，按回车键搜索'} 
             onKeyDown={(e: any) => {
               const isEnter = e.key === 'Enter' || e.keyCode === 13;
@@ -265,20 +270,20 @@ const MultiCascader: React.FC<MultiCascaderProps> = ({
           />
         </div>
       )}
-      <div className={s['multi-cascader-body']}>
+      <div className="multi-cascader-body">
         {keyword.length ? (
-          <div className={s['multi-cascader-search-result']}>
-            <div className={s['multi-cascader-search-result-header']}>
+          <div className="multi-cascader-search-result">
+            <div className="multi-cascader-search-result-header">
               <span>搜索词</span>
               <span>搜索结果</span>
             </div>
-            <div className={s['multi-cascader-search-result-items']}>
+            <div className="multi-cascader-search-result-items">
               {[...searchResult.keys()].map(key => (
-                <div key={key} className={s['multi-cascader-search-result-item']}>
-                  <div className={s['multi-cascader-search-result-item-keyword']} title={key}>
+                <div key={key} className="multi-cascader-search-result-item">
+                  <div className="multi-cascader-search-result-item-keyword" title={key}>
                     {key}
                   </div>
-                  <div className={s['multi-cascader-search-result-item-contents']}>
+                  <div className="multi-cascader-search-result-item-contents">
                     {searchResult.get(key)?.length
                       ? searchResult.get(key)!.map(it => {
                           const htmlContent = getParentValue(it, flatOptionsMap)
@@ -294,24 +299,24 @@ const MultiCascader: React.FC<MultiCascaderProps> = ({
                             isIndeterminate = selectedItem.some(i => childrenValue.includes(i));
                           }
                           return (
-                            <div key={it.value} className={s['multi-cascader-search-result-item-content']}>
+                            <div key={it.value} className="multi-cascader-search-result-item-content">
                               <span
                                 className={cs({
-                                  [s['multi-cascader-checkbox']]: true,
-                                  [s['multi-cascader-checkbox-indeterminate']]: isIndeterminate,
-                                  [s['multi-cascader-checkbox-checked']]: isChecked,
-                                  [s['multi-cascader-checkbox-disabled']]: disabled || it.disabled,
+                                  'multi-cascader-checkbox': true,
+                                  'multi-cascader-checkbox-indeterminate': isIndeterminate,
+                                  'multi-cascader-checkbox-checked': isChecked,
+                                  'multi-cascader-checkbox-disabled': disabled || it.disabled,
                                 })}
                                 onClick={() => {
                                   if (disabled || it.disabled) return;
                                   handleChecked(it, !isChecked);
                                 }}
                               >
-                                <span className={s['multi-cascader-checkbox-inner']} />
+                                <span className="multi-cascader-checkbox-inner" />
                               </span>
                               <div
                                 dangerouslySetInnerHTML={{ __html: htmlContent }}
-                                className={s['multi-cascader-search-result-item-content-text']}
+                                className="multi-cascader-search-result-item-content-text"
                               />
                             </div>
                           );
@@ -323,34 +328,34 @@ const MultiCascader: React.FC<MultiCascaderProps> = ({
             </div>
           </div>
         ) : (
-          <div className={s['multi-cascader-menus']}>
-            <ul className={s['multi-cascader-menu']}>
+          <div className="multi-cascader-menus">
+            <ul className="multi-cascader-menu">
               {options.map(item => getMenuItem(item))}
             </ul>
             {activeList.map(item => {
               const temp = flatOptionsMap.get(item);
               if (!temp?.children?.length) return null;
               return (
-                <ul key={item} className={s['multi-cascader-menu']}>
+                <ul key={item} className="multi-cascader-menu">
                   {temp.children.map((it: optionType) => getMenuItem(it))}
                 </ul>
               );
             })}
           </div>
         )}
-        <div className={s['multi-cascader-result']}>
-          <div className={s['multi-cascader-result-header']}>
+        <div className="multi-cascader-result">
+          <div className="multi-cascader-result-header">
             <span>已选 {selectedItem.length} 项</span>
-            <span className={s['multi-cascader-result-clear']} onClick={() => {setSelectedItem([]); onChange?.([])}}>清空</span>
+            <span className="multi-cascader-result-clear" onClick={() => {setSelectedItem([]); onChange?.([])}}>清空</span>
           </div>
-          <div className={s['multi-cascader-result-body']}>
+          <div className="multi-cascader-result-body">
             {selectedItem.length ? selectedItem.map(item => (
-              <div key={item} className={s['multi-cascader-result-item']}>
+              <div key={item} className="multi-cascader-result-item">
                 {getParentValue(flatOptionsMap.get(item), flatOptionsMap)
                   .map(it => flatOptionsMap.get(it)?.label)
                   .reverse()
                   .join(' / ')}
-                <span className={s['multi-cascader-result-item-close']} onClick={() => handleDelete(item)}>+</span>
+                <span className="multi-cascader-result-item-close" onClick={() => handleDelete(item)}>+</span>
               </div>
             )) : (
               <EmptyTable emptyText="暂未选择" style={{ marginTop: 60 }}/>

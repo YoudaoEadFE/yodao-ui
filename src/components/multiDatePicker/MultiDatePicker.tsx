@@ -3,7 +3,7 @@ import { chunk } from 'lodash';
 import cs from 'classnames';
 import moment from 'moment';
 import { Calendar } from 'calendar';
-import s from './multiDatePicker.module.less';
+import './multiDatePicker.less';
 
 // 合并日期区间
 const mergeDateIntervals = (intervals: string[][]) => {
@@ -32,6 +32,10 @@ const allMonths = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
 
 interface MultiDatePickerProps { 
   /**
+   * component class name
+   */
+  className?: string;
+  /**
    * Week start number, 0 means Sunday, 1 means Monday ... etc.
    */
   weekStart?: number;
@@ -58,6 +62,7 @@ interface MultiDatePickerProps {
 }
 
 const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
+  className,
   weekStart = 1,
   format = 'YYYY-MM-DD',
   themeColor = '#1890ff',
@@ -169,29 +174,29 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
   }
   
   return (
-    <div className={s['multi-datepicker']} style={{ '--mdp-theme-color': themeColor } as CSSProperties}>
-      <div className={s['multi-datepicker-left']}>
-        <div className={s['multi-datepicker-panel']}>
-          <div className={s['multi-datepicker-panel-header']}>
+    <div className={cs('multi-datepicker', className)} style={{ '--mdp-theme-color': themeColor } as CSSProperties}>
+      <div className="multi-datepicker-left">
+        <div className="multi-datepicker-panel">
+          <div className="multi-datepicker-panel-header">
             <button 
               type="button" 
-              className={s['multi-datepicker-header-super-prev-btn']}
+              className="multi-datepicker-header-super-prev-btn"
               onClick={handleYearPrev}
             >
-              <span className={s['multi-datepicker-super-prev-icon']}></span>
+              <span className="multi-datepicker-super-prev-icon"></span>
             </button>
             {isDayPanel && (
               <button 
                 type="button" 
-                className={s['multi-datepicker-header-prev-btn']}
+                className="multi-datepicker-header-prev-btn"
                 onClick={handleMonthPrev}
               >
-                <span className={s['multi-datepicker-prev-icon']}></span>
+                <span className="multi-datepicker-prev-icon"></span>
               </button>
             )}
-            <div className={s['multi-datepicker-header-view']}>
+            <div className="multi-datepicker-header-view">
               <span
-                className={s['multi-datepicker-year-btn']}
+                className="multi-datepicker-year-btn"
                 role="button"
                 onClick={() => {
                   setPanelType('YEAR');
@@ -207,7 +212,7 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
               </span>
               {isDayPanel && (
                 <span
-                  className={s['multi-datepicker-month-btn']}
+                  className="multi-datepicker-month-btn"
                   role="button" 
                   onClick={() => {
                     setPanelType('MONTH');
@@ -220,36 +225,36 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
             {isDayPanel && (
               <button 
                 type="button" 
-                className={s['multi-datepicker-header-next-btn']}
+                className="multi-datepicker-header-next-btn"
                 onClick={handleMonthNext}
               >
-                <span className={s['multi-datepicker-next-icon']}></span>
+                <span className="multi-datepicker-next-icon"></span>
               </button>
             )}
             <button 
               type="button" 
-              className={s['multi-datepicker-header-super-next-btn']}
+              className="multi-datepicker-header-super-next-btn"
               onClick={handleYearNext}
             >
-              <span className={s['multi-datepicker-super-next-icon']}></span>
+              <span className="multi-datepicker-super-next-icon"></span>
             </button>
           </div>
-          <div className={s['multi-datepicker-panel-body']}>
+          <div className="multi-datepicker-panel-body">
             {/* 日期面板 */}
             {isDayPanel && (
-              <table className={s['multi-datepicker-day-panel-table']}>
+              <table className="multi-datepicker-day-panel-table">
                 <thead>
                   <tr role="row">
                     {weks.map(w => (
-                      <th key={w} role="columnheader" title={`周${w}`} className={s['multi-datepicker-column-header']}>
-                        <span className={s['multi-datepicker-column-header-inner']}>{w}</span>
+                      <th key={w} role="columnheader" title={`周${w}`} className="multi-datepicker-column-header">
+                        <span className="multi-datepicker-column-header-inner">{w}</span>
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className={s['multi-datepicker-tbody']}>
+                <tbody className="multi-datepicker-tbody">
                   {dateNum.map((days, i) => (
-                    <tr role="row" key={i} className="">
+                    <tr role="row" key={i}>
                       {days.map((day, j) => {
                         if (day) {
                           const dateStr = date[i][j];
@@ -262,23 +267,23 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
                               key={j} 
                               title={dateStr} 
                               className={cs(
-                                s['multi-datepicker-cell'], 
+                                'multi-datepicker-cell', 
                                 { 
-                                  [s['multi-datepicker-today']]: moment().format(format) === dateStr,
-                                  [s['multi-datepicker-in-range-cell']]: isInRange,
-                                  [s['multi-datepicker-selected-cell']]: isSelected,
-                                  [s['multi-datepicker-disabled-cell']]: isDisabled,
+                                  'multi-datepicker-today': moment().format(format) === dateStr,
+                                  'multi-datepicker-in-range-cell': isInRange,
+                                  'multi-datepicker-selected-cell': isSelected,
+                                  'multi-datepicker-disabled-cell': isDisabled,
                                 }
                               )}
                               onClick={handleSelectDate.bind(null, dateStr, isDisabled)}
                             >
-                              <div className={s['multi-datepicker-cell-inner']} aria-selected={isSelected} aria-disabled={isDisabled}>{day}</div>
+                              <div className="multi-datepicker-cell-inner" aria-selected={isSelected} aria-disabled={isDisabled}>{day}</div>
                             </td>
                           )
                         }
                         return (
-                          <td role="gridcell" key={j} className="ant-calendar-cell">
-                            <div className="ant-calendar-date" aria-selected="false" aria-disabled="true"></div>
+                          <td role="gridcell" key={j} className="multi-datepicker-cell multi-datepicker-empty-cell">
+                            <div className="multi-datepicker-cell-inner"></div>
                           </td>
                         )
                       })}
@@ -289,8 +294,8 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
             )}
             {/* 月份面板 */}
             {isMonthPanel && (
-              <table className={s['multi-datepicker-month-panel-table']}>
-                <tbody className={s['multi-datepicker-tbody']}>
+              <table className="multi-datepicker-month-panel-table">
+                <tbody className="multi-datepicker-tbody">
                   {allMonths.map(item => (
                     <tr role="row" key={item.toString()}>
                       {item.map(m => (
@@ -298,13 +303,13 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
                           key={m}
                           role="gridcell" 
                           title={`${year}年${m}月`} 
-                          className={s['multi-datepicker-cell']}
+                          className="multi-datepicker-cell"
                           onClick={() => {
                             setPanelType('DAY');
                             setMonth(m - 1);
                           }}
                         >
-                          <div className={s['multi-datepicker-cell-inner']}>{m}</div>
+                          <div className="multi-datepicker-cell-inner">{m}</div>
                         </td>
                       ))}
                     </tr>
@@ -314,8 +319,8 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
             )}
             {/* 年份面板 */}
             {isYearPanel && (
-              <table className={s['multi-datepicker-year-panel-table']}>
-                <tbody className={s['multi-datepicker-tbody']}>
+              <table className="multi-datepicker-year-panel-table">
+                <tbody className="multi-datepicker-tbody">
                   {chunk(getCurrentYearPage(yearPage), 3).map(item => (
                     <tr key={item.toString()} role="row">
                       {item.map(y => (
@@ -323,13 +328,13 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
                           key={y}
                           role="gridcell"
                           title={`${y}年`}
-                          className={s['multi-datepicker-cell']}
+                          className="multi-datepicker-cell"
                           onClick={() => {
                             setPanelType('MONTH');
                             setYear(y);
                           }}
                         >
-                          <div className={s['multi-datepicker-cell-inner']}>{y}</div>
+                          <div className="multi-datepicker-cell-inner">{y}</div>
                         </td>
                       ))}
                     </tr>
@@ -340,19 +345,19 @@ const MultiDatePicker: React.FC<MultiDatePickerProps> = ({
           </div>
         </div>
       </div>
-      <div className={s['multi-datepicker-right']}>
-        <div className={s['multi-datepicker-right-header']}>
+      <div className="multi-datepicker-right">
+        <div className="multi-datepicker-right-header">
           <span>已选择时间段</span>
           <span onClick={handleDeleteAllDate}>清空已选</span>
         </div>
-        <div className={s['multi-datepicker-right-body']}>
+        <div className="multi-datepicker-right-body">
           {selectedDate.map((interval, idx) => (
             <div
               key={interval.toString()}
-              className={s['multi-datepicker-right-body-tag']}
+              className="multi-datepicker-right-body-tag"
             >
               <span>{interval[0]} ~ {interval[1]}</span>
-              <span className={s['multi-datepicker-right-body-close']} onClick={handleDeleteDate.bind(null, idx)} >
+              <span className="multi-datepicker-right-body-close" onClick={handleDeleteDate.bind(null, idx)} >
                 <svg fillRule="evenodd" viewBox="64 64 896 896" focusable="false" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true">
                   <path d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"></path>
                 </svg>

@@ -3,13 +3,17 @@ import { useState, useRef, useMemo, useEffect } from 'react';
 import cs from 'classnames';
 import { SelectableGroup } from 'react-selectable-fast';
 import MutiCell from './MutiCell';
-import s from './multipleSelector.module.less';
+import './multipleSelector.less';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SelectableGroupDom = SelectableGroup as any
 
 
 interface MultipleSelectorProps {
+  /**
+   * component class name
+   */
+  className?: string;
   /**
    * Components name
    */
@@ -49,6 +53,7 @@ interface MultipleSelectorProps {
 }
 
 const MultipleSelector = ({
+  className,
   componentsName = '多重选择器',
   value = [],
   isEditMode = false,
@@ -127,12 +132,11 @@ const MultipleSelector = ({
   };
 
   return (
-    <div className={s['ds-panel-container']} style={{width: containerWidth}}>
-      <div className={s['ds-outer-container']}>
-        <div className={s['ds-container']} style={{height: containerHeight}}>
-          <div className={s['ds-header']}>{componentsName}</div>
-
-          <div className={s['ds-body']} style={{ pointerEvents: isEditMode ? 'none' : 'auto' }}>
+    <div className={cs('multi-selector', className)} style={{width: containerWidth}}>
+      <div className="multi-selector-outer-container">
+        <div className="multi-selector-container" style={{height: containerHeight}}>
+          <div className="multi-selector-container-header">{componentsName}</div>
+          <div className="multi-selector-container-body" style={{ pointerEvents: isEditMode ? 'none' : 'auto' }}>
             <SelectableGroupDom
               ref={selectableGroupRef}
               tolerance={0}
@@ -150,7 +154,6 @@ const MultipleSelector = ({
                     oneAge={currentyearAge(v) && !nextYearAge(v) && !lastYearAge(v)}
                     startAge={currentyearAge(v) && nextYearAge(v) && !lastYearAge(v)}
                     endAge={currentyearAge(v) && !nextYearAge(v) && lastYearAge(v)}
-                    showMinorColor={currentyearAge(v) && nextYearAge(v) && lastYearAge(v)}
                   >
                     {v}
                   </MutiCell>
@@ -159,23 +162,23 @@ const MultipleSelector = ({
             </SelectableGroupDom>
           </div>
         </div>
-        <div className={cs(s['ds-selectedDate'], 'ant-picker-date-panel')}>
-          <div className={s['ds-selectedDate-header']}>
+        <div className="multi-selector-selectedDate">
+          <div className="multi-selector-selectedDate-header">
             <span>{selectedTitle}</span>
             <span
               onClick={handleDeleteAll}
               className={cs({
-                [s['ds-selectedDate-notAllow-clear']]: isEditMode,
+                'multi-selector-selectedDate-notAllow-clear': isEditMode,
               })}
             >
               清空已选
             </span>
           </div>
-          <div className={s['ds-selectedDate-body']} style={{maxHeight: containerHeight > 72 ? containerHeight - 72 : 72}}>
+          <div className="multi-selector-selectedDate-body" style={{maxHeight: containerHeight > 72 ? containerHeight - 72 : 72}}>
             {selectedAgesShow.map((item, idx) => (
               <span
                 key={idx}
-                className={s['ds-selectedDate-tag']}
+                className="multi-selector-selectedDate-tag"
               >
                 {item[0]} ~ {item[item.length - 1]}
                 <span

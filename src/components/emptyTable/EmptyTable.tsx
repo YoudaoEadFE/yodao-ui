@@ -1,4 +1,4 @@
-import s from './emptyTable.module.less';
+import './emptyTable.less';
 
 
 const EmptyIcon = () => (<svg className="icon" viewBox="0 0 1598 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +20,10 @@ const EmptyIcon = () => (<svg className="icon" viewBox="0 0 1598 1024" version="
 </svg>)
 
 const EmptyTable = (props: {
+  /**
+   * 自定义类名
+   */
+  className?: string;
   /**
    * 自定义样式
    */
@@ -46,6 +50,7 @@ const EmptyTable = (props: {
   onReset?: () => void;
 }) => {
   const {
+    className,
     style,
     onReset,
     onSearch = false,
@@ -55,23 +60,23 @@ const EmptyTable = (props: {
   } = props;
 
   return (
-    <div className={s.noResult} style={style}>
+    <div className={`empty-table ${className}`} style={style}>
       {onSearch && onReset ? (
         <span>
           暂未找到符合条件的数据，
-          <a className={s._a} onClick={() => onReset?.()}>
+          <a className="empty-table-reset" onClick={() => onReset?.()}>
             重置筛选条件
           </a>
         </span>
       ) : onSearch && searchText ? (
-          <div className={s.noResultImg}>
+          <div className="empty-table-noresult-img">
             { typeof SearchIcon === 'string' ? <img src={SearchIcon} /> : SearchIcon}
-            <div className={s.emptyDescription}>{searchText || '暂无数据'}</div>
+            <div className="empty-table-description">{searchText || '暂无数据'}</div>
           </div>
       ) : (
-          <div className={s.noResultImg}>
+          <div className="empty-table-noresult-img">
             { typeof SearchIcon === 'string' ? <img src={SearchIcon} /> : SearchIcon}
-            <div className={s.emptyDescription}>{emptyText}</div>
+            <div className="empty-table-description">{emptyText}</div>
           </div>
       )}
     </div>
