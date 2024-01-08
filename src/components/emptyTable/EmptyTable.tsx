@@ -21,31 +21,31 @@ const EmptyIcon = () => (<svg className="icon" viewBox="0 0 1598 1024" version="
 
 const EmptyTable = (props: {
   /**
-   * 自定义类名
+   * Custom class name
    */
   className?: string;
   /**
-   * 自定义样式
+   * Custom style
    */
   style?: React.CSSProperties;
   /**
-   * 定制图标
+   * Custom icon
    */
   SearchIcon?: JSX.Element | string;
   /**
-   * 为空时候字段显示，默认为暂无数据
+   * empty text
    */
   emptyText?: string;
   /**
-   * 搜索状态为空时候的文字
+   * search text
    */
   searchText?: string;
   /**
-   * 是否是搜索状态
+   * searching status
    */
   onSearch?: boolean;
   /**
-   * 是否有重置搜索项功能
+   * reset callback
    */
   onReset?: () => void;
 }) => {
